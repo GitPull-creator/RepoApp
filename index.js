@@ -2,7 +2,6 @@ const searchWrapper = document.querySelector('.search-input')
 const inputBox = searchWrapper.querySelector('input')
 const sugBox = searchWrapper.querySelector('.auto-box')
 const reposList = document.querySelector('.repo-list')
-
 let temp
 
 function debounce(func, timeout = 400) {
@@ -25,7 +24,7 @@ async function searchRepo() {
         })
 }
 
-const searchChange = debounce(() => searchRepo(), 600)
+const searchChange = debounce(() => searchRepo());
 
 inputBox.addEventListener('keyup', searchChange)
 
@@ -36,13 +35,13 @@ sugBox.addEventListener('click', function (e) {
         }
     })
 })
-
-reposList.addEventListener('click', function (e) {
+const deleteList = function (e) {
     if (e.target.classList.contains("close")) {
         e.target.parentElement.remove()
     }
-})
+}
 
+reposList.addEventListener('click', deleteList)
 
 
 function createSug(repo) {
@@ -76,19 +75,13 @@ function showSuggestions(list) {
     sugBox.innerHTML = listData
 }
 
-function createElement(elementTag, elementClass) {
-    const element = document.createElement(elementTag);
-    if (elementClass) element.classList.add(elementClass);
-    return element;
-}
-
 function createRepo(repoData) {
-    const repoElement = createElement('li', 'repo-pin');
-    repoElement.innerHTML = `<div class="repoName"> Name: ${repoData.name}</div>
+    reposList.insertAdjacentHTML('beforeend', `<li class="repo-pin">
+                                <div class="repoName"> Name: ${repoData.name}</div>
                                 <div class="repoOwner"> Owner: ${repoData.owner.login}</div>
                                 <div class="repoStars"> Stars: ${repoData.stargazers_count}</div>
-                            <div class="close"></div>`
-    reposList.append(repoElement)
+                                <div class="close"></div>
+                                                           </li>`)
 }
 
 
