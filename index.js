@@ -37,6 +37,12 @@ sugBox.addEventListener('click', function (e) {
     })
 })
 
+reposList.addEventListener('click', function (e) {
+    if (e.target.classList.contains("close")) {
+        e.target.parentElement.remove()
+    }
+})
+
 
 
 function createSug(repo) {
@@ -44,7 +50,7 @@ function createSug(repo) {
     temp = arr;
     console.log(temp)
     let arr1 = arr.map((item) => {
-        return item = `<li>${item.name}</li>`
+        return `<li>${item.name}</li>`
     });
     searchWrapper.classList.add('active');
     showSuggestions(arr1);
@@ -78,14 +84,10 @@ function createElement(elementTag, elementClass) {
 
 function createRepo(repoData) {
     const repoElement = createElement('li', 'repo-pin');
-    repoElement.innerHTML = `<div class="pin-wrapper">
-                                <div class="repoName"> Name: ${repoData.name}</div>
+    repoElement.innerHTML = `<div class="repoName"> Name: ${repoData.name}</div>
                                 <div class="repoOwner"> Owner: ${repoData.owner.login}</div>
                                 <div class="repoStars"> Stars: ${repoData.stargazers_count}</div>
-                            </div>
-                            <div class="delete-wrapper">
-                            <div class="close"></div>
-                            </div>`
+                            <div class="close"></div>`
     reposList.append(repoElement)
 }
 
