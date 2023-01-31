@@ -4,7 +4,7 @@ const sugBox = searchWrapper.querySelector('.auto-box')
 const reposList = document.querySelector('.repo-list')
 let temp
 
-function debounce(func, timeout = 400) {
+function debounce(func, timeout = 600) {
     let timer;
     return (...args) => {
         clearTimeout(timer);
@@ -22,6 +22,7 @@ async function searchRepo() {
                     .then((res) => createSug(res.items))
             }
         })
+
 }
 
 const searchChange = debounce(() => searchRepo());
