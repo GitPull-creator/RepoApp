@@ -30,7 +30,7 @@ inputBox.addEventListener('keyup', searchChange)
 
 sugBox.addEventListener('click', function (e) {
     temp.forEach(item => {
-        if (item.name === e.target.innerHTML) {
+        if (item.name === e.target.textContent) {
             createRepo(item)
         }
     })
@@ -47,7 +47,6 @@ reposList.addEventListener('click', deleteList)
 function createSug(repo) {
     let arr = repo.slice(0, 5);
     temp = arr;
-    console.log(temp)
     let arr1 = arr.map((item) => {
         return `<li>${item.name}</li>`
     });
@@ -59,12 +58,6 @@ function createSug(repo) {
     }
 }
 
-function select(element) {
-    inputBox.value = element.textContent;
-    searchWrapper.classList.remove('active')
-    inputBox.value = ''
-}
-
 function showSuggestions(list) {
     let listData;
     if (!list.length) {
@@ -72,7 +65,15 @@ function showSuggestions(list) {
     } else {
         listData = list.join('')
     }
-    sugBox.innerHTML = listData
+    sugBox.insertAdjacentHTML("beforeend", listData);
+}
+
+
+function select(element) {
+    inputBox.value = element.textContent;
+    searchWrapper.classList.remove('active')
+    inputBox.value = ''
+    while (sugBox.lastChild) sugBox.removeChild(sugBox.lastChild);
 }
 
 function createRepo(repoData) {
