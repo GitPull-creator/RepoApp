@@ -4,7 +4,7 @@ const sugBox = searchWrapper.querySelector('.auto-box')
 const reposList = document.querySelector('.repo-list')
 let temp
 
-function debounce(func, timeout = 600) {
+function debounce(func, timeout = 500) {
     let timer;
     return (...args) => {
         clearTimeout(timer);
@@ -66,7 +66,7 @@ function showSuggestions(list) {
     } else {
         listData = list.join('')
     }
-    sugBox.insertAdjacentHTML("beforeend", listData);
+    sugBox.innerHTML = listData
 }
 
 
