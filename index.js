@@ -27,12 +27,15 @@ async function searchRepo() {
 
 const searchChange = debounce(() => searchRepo());
 
-inputBox.addEventListener('keyup', searchChange)
+inputBox.addEventListener('change', searchChange)
 
 sugBox.addEventListener('click', function (e) {
     temp.forEach(item => {
         if (item.name === e.target.textContent) {
             createRepo(item)
+            searchWrapper.classList.remove('active')
+            inputBox.value = '';
+            while (sugBox.lastChild) sugBox.removeChild(sugBox.lastChild);
         }
     })
 })
@@ -48,33 +51,22 @@ reposList.addEventListener('click', deleteList)
 function createSug(repo) {
     let arr = repo.slice(0, 5);
     temp = arr;
-    let arr1 = arr.map((item) => {
+    let mutableArr = arr.map((item) => {
         return `<li>${item.name}</li>`
     });
     searchWrapper.classList.add('active');
-    showSuggestions(arr1);
-    let allList = sugBox.querySelectorAll('li')
-    for (let i = 0; i < allList.length; i++) {
-        allList[i].setAttribute('onClick', 'select(this)')
-    }
+    showSuggestions(mutableArr);
+
 }
 
 function showSuggestions(list) {
     let listData;
-    if (!list.length) {
-        listData = `<li>${inputBox.value}</li>`
-    } else {
+    if (list === []){
+        return
+    }else{
         listData = list.join('')
     }
     sugBox.innerHTML = listData
-}
-
-
-function select(element) {
-    inputBox.value = element.textContent;
-    searchWrapper.classList.remove('active')
-    inputBox.value = ''
-    while (sugBox.lastChild) sugBox.removeChild(sugBox.lastChild);
 }
 
 function createRepo(repoData) {

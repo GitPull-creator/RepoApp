@@ -57,7 +57,7 @@ body {
 }
 
 .search-input.active .auto-box {
-    padding: 10px 8px;
+
     opacity: 1;
     pointer-events: auto;
 }
