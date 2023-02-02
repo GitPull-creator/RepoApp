@@ -52,21 +52,20 @@ function createSug(repo) {
     let arr = repo.slice(0, 5);
     temp = arr;
     let mutableArr = arr.map((item) => {
-        return `<li>${item.name}</li>`
+        return `${item.name}`
     });
+    console.log(mutableArr)
     searchWrapper.classList.add('active');
     showSuggestions(mutableArr);
 
 }
 
 function showSuggestions(list) {
-    let listData;
-    if (list === []){
-        return
-    }else{
-        listData = list.join('')
+    for (let i = 0; i < list.length; i++) {
+        let el = document.createElement('li');
+        el.textContent = `${list[i]}`;
+        sugBox.append(el)
     }
-    sugBox.innerHTML = listData
 }
 
 function createRepo(repoData) {
