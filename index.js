@@ -47,7 +47,6 @@ const deleteList = function (e) {
 
 reposList.addEventListener('click', deleteList)
 
-
 function createSug(repo) {
     let arr = repo.slice(0, 5);
     temp = arr;
