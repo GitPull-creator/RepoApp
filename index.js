@@ -69,12 +69,24 @@ function showSuggestions(list) {
 }
 
 function createRepo(repoData) {
-    reposList.insertAdjacentHTML('beforeend', `<li class="repo-pin">
-                                <div class="repoName"> Name: ${repoData.name}</div>
-                                <div class="repoOwner"> Owner: ${repoData.owner.login}</div>
-                                <div class="repoStars"> Stars: ${repoData.stargazers_count}</div>
-                                <div class="close"></div>
-                                                           </li>`)
+    let element = document.createElement('li');
+    element.classList.add('repo-pin');
+
+    let name = document.createElement('div');
+    name.textContent = `Name: ${repoData.name}`;
+
+    let owner = document.createElement('div');
+    owner.textContent = `Owner: ${repoData.owner.login}`;
+
+    let stars = document.createElement('div');
+    stars.textContent = `Stars: ${repoData.stargazers_count}`;
+
+    let close = document.createElement('div');
+    close.classList.add('close');
+
+    element.append(name, owner, stars, close)
+
+    reposList.append(element)
 }
 
 
